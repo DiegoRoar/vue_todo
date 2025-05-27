@@ -1,29 +1,40 @@
-# .
+# 📝 Vue 3 ToDo App
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple yet functional ToDo app built with **Vue 3** and **Vite**. This project demonstrates core Vue features such as reactivity, component structure, lifecycle hooks, and state management using the Composition API.
 
-## Recommended IDE Setup
+> Designed as a showcase of my frontend development skills.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Customize configuration
+## 🚀 Features
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Add, edit, and delete tasks
+- Mark tasks as completed
+- Filter tasks by status (all, active, completed)
+- Fully responsive UI
+- Clean and modular codebase
+- Built with Vue 3 + Vite
 
-## Project Setup
+---
 
-```sh
+## 🛠️ Tech Stack
+
+- [Vue 3](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+
+---
+
+## 🧑‍💻 Getting Started
+
+### Recommended IDE Setup
+
+- [VSCode](https://code.visualstudio.com/)
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+### Project Setup
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+---
