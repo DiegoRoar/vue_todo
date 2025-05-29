@@ -18,6 +18,8 @@ html {
   --hover-color: #272832;
   --accent-color: #0071ff;
   --text-color: #c9c9c9;
+  --text-shadow: 0 2px 12px rgba(221, 136, 221, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.18), 0 0.5px 0.5px rgba(255, 255, 255, 0.12);
 }
 
 body {
@@ -46,4 +48,12 @@ main {
 
 main p {
   margin-top: 0.35em;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
