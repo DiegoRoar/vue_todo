@@ -23,8 +23,21 @@ html {
 body {
   font-family: "Nunito", sans-serif;
   min-height: 100vh;
+  min-height: 100svh;
   min-height: 100dvh;
   background-color: var(--primary-color);
+}
+
+@supports (height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
+}
+
+@supports (height: 100svh) {
+  body {
+    min-height: 100svh;
+  }
 }
 
 main {
