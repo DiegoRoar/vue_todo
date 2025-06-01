@@ -49,7 +49,7 @@ form {
   align-items: center;
   gap: 1rem;
   margin-top: 2.5rem;
-  width: 700px;
+  width: 400px;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
