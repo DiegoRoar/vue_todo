@@ -7,7 +7,14 @@
       id="newTask"
       type="text"
       placeholder="Add a new task..."
+      :aria-invalid="!!error || undefined"
+      @input="error = ''"
     />
+    <div class="error-group">
+      <small v-if="error" class="small-error">{{ error }}</small>
+      <!-- <small v-else" class="small-ok">{{ }}</small> -->
+    </div>
+
     <div class="btn-container">
       <button type="submit" class="btn">Add Task</button>
     </div>
@@ -21,11 +28,16 @@ const newTask = ref("");
 const emit = defineEmits<{
   addTask: [newTask: string];
 }>();
+
+const error = ref("");
+
 // functions
 const formSubmitted = () => {
   if (newTask.value.trim()) {
     emit("addTask", newTask.value.trim());
     newTask.value = "";
+  } else {
+    error.value = "Task cannot be empty!";
   }
 };
 </script>
@@ -74,5 +86,17 @@ input[type="text"]:focus {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+
+.error-group {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.small-error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  text-align: left;
 }
 </style>

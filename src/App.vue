@@ -1,9 +1,9 @@
 <template>
   <div class="container">
+    <h1 class="title">{{ title }}</h1>
     <main>
-      <h1 class="title">{{ title }}</h1>
       <TodoForm @add-task="addTask" />
-      <h3>There are {{ tasks.length }}</h3>
+      <article v-for="task in tasks" :key="task.id">{{ task.title }}</article>
     </main>
   </div>
 </template>
