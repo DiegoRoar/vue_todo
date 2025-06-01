@@ -1,15 +1,17 @@
 <template>
   <form @submit.prevent="formSubmitted">
     <label for="newTask">New Task</label>
-    <input
+    <textarea
       v-model="newTask"
       name="newTask"
       id="newTask"
-      type="text"
-      placeholder="Add a new task..."
+      placeholder="Add a new task... (max 250 characters)"
+      :class="{ 'has-error': !!error }"
       :aria-invalid="!!error || undefined"
       @input="error = ''"
-    />
+      maxlength="250"
+      rows="5"
+    ></textarea>
     <div class="error-group">
       <small v-if="error" class="small-error">{{ error }}</small>
       <!-- <small v-else" class="small-ok">{{ }}</small> -->
@@ -65,6 +67,10 @@ label {
 }
 
 input[type="text"] {
+  display: none;
+}
+
+textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   border: none;
@@ -74,9 +80,12 @@ input[type="text"] {
   font-size: 1rem;
   transition: box-shadow 0.2s, border 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  resize: vertical;
+  min-height: 60px;
+  max-height: 200px;
 }
 
-input[type="text"]:focus {
+textarea:focus {
   outline: none;
   border: 2px solid var(--accent-color);
   box-shadow: 0 0 0 2px var(--accent-color) 33;
