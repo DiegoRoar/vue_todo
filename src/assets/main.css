@@ -57,3 +57,31 @@ main p {
   padding: 2rem 1rem;
   box-sizing: border-box;
 }
+
+/* buttons */
+.btn {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--hover-color);
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 113, 255, 0.5);
+}
+.btn:active {
+  background-color: darken(var(--accent-color), 10%);
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+.btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
