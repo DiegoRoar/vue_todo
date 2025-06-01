@@ -51,8 +51,8 @@ form {
   align-items: center;
   gap: 1rem;
   margin-top: 2.5rem;
-  width: 400px;
-  max-width: 90%;
+  width: 100%;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -107,5 +107,34 @@ textarea:focus {
   font-size: 0.8rem;
   margin-top: -0.5rem;
   text-align: left;
+}
+
+@media (max-width: 900px) {
+  form {
+    max-width: 98vw;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  textarea {
+    font-size: 0.98rem;
+    padding: 0.7rem 0.7rem;
+    min-height: 48px;
+    max-height: 140px;
+  }
+  .btn-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  form {
+    max-width: 100vw;
+    padding: 1rem 0.2rem 0.7rem 0.2rem;
+  }
+  textarea {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.5rem;
+    min-height: 36px;
+    max-height: 100px;
+  }
 }
 </style>

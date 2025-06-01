@@ -142,23 +142,43 @@ input[type="checkbox"] {
   font-size: 1.1rem;
 }
 
-@media (max-width: 700px) {
-  .todo-table,
+@media (max-width: 900px) {
+  .todo-table {
+    max-width: 100vw;
+    margin: 1.5rem 0 0 0;
+    border-radius: 0.7rem;
+  }
   .todo-table-header,
   .todo-table-row {
-    max-width: 98vw;
     grid-template-columns: 28px 1fr 80px;
     font-size: 0.98rem;
     padding: 0.7rem 0.5rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .todo-table {
+    max-width: 100vw;
+    margin: 1rem 0 0 0;
+    border-radius: 0.5rem;
+  }
   .todo-table-header,
   .todo-table-row {
     grid-template-columns: 20px 1fr 60px;
     font-size: 0.93rem;
     padding: 0.5rem 0.2rem;
+  }
+  .todo-task-title {
+    padding-right: 0.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .todo-table-header,
+  .todo-table-row {
+    grid-template-columns: 16px 1fr 40px;
+    font-size: 0.88rem;
+    padding: 0.3rem 0.1rem;
   }
 }
 </style>

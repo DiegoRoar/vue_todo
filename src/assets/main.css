@@ -45,7 +45,7 @@ body {
 main {
   padding: min(5em, 7%);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 2em;
 }
 
@@ -87,4 +87,17 @@ main p {
 .btn:disabled {
   background-color: #555;
   cursor: not-allowed;
+}
+
+@media (min-width: 900px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 1.2em 0.5em;
+    gap: 1em;
+  }
 }
