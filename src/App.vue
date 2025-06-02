@@ -1,32 +1,77 @@
 <template>
   <div class="container">
-    <h1 class="title">{{ title }}</h1>
-    <main>
-      <div class="form-limit-row">
-        <div class="form-limit-flex">
-          <TodoForm
-            @add-task="addTask"
-            :disabled="tasks.length >= 10"
-            :tasks-length="tasks.length"
-          />
+    <header class="header">
+      <h1 class="title">{{ title }}</h1>
+    </header>
+    <div class="content-wrapper">
+      <article class="article-card">
+        <h2 class="article-title">About This App</h2>
+        <p class="article-subtitle">
+          A modern Todo application showcasing Vue 3 and TypeScript capabilities
+        </p>
+        <div class="article-meta">
+          <span>Vue 3</span>
+          <span>•</span>
+          <span>TypeScript</span>
+          <span>•</span>
+          <span>Composition API</span>
         </div>
+        <div class="article-content">
+          <p>
+            This application demonstrates advanced features and best practices in Vue development,
+            combining modern web technologies with a clean, intuitive interface.
+          </p>
+          <div class="article-section">
+            <h3>Key Features</h3>
+            <ul>
+              <li>Vue 3 Composition API with TypeScript for type safety</li>
+              <li>Responsive design with modern CSS and flexible layouts</li>
+              <li>Component-based architecture for maintainable code</li>
+              <li>State management using Vue's reactivity system</li>
+              <li>Form handling and validation</li>
+              <li>Task statistics and progress tracking</li>
+            </ul>
+          </div>
+          <div class="article-section">
+            <h3>Technical Highlights</h3>
+            <ul>
+              <li>TypeScript for enhanced development experience</li>
+              <li>CSS Variables for consistent theming</li>
+              <li>Responsive design with mobile-first approach</li>
+              <li>Modern ES6+ JavaScript features</li>
+              <li>Clean and maintainable code structure</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="todo-section">
+        <div class="form-limit-row">
+          <div class="form-limit-flex">
+            <TodoForm
+              @add-task="addTask"
+              :disabled="tasks.length >= 10"
+              :tasks-length="tasks.length"
+            />
+          </div>
+        </div>
+        <div class="task-stats card" v-if="tasks.length">
+          <div class="stat-item">
+            <span class="stat-label">Total Tasks:</span>
+            <span class="stat-value">{{ tasks.length }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Pending:</span>
+            <span class="stat-value pending">{{ pendingTasks }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Completed:</span>
+            <span class="stat-value completed">{{ completedTasks }}</span>
+          </div>
+        </div>
+        <TaskList :tasks="tasks" @update-task="updateTask" @delete-task="deleteTask" />
       </div>
-      <div class="task-stats" v-if="tasks.length">
-        <div class="stat-item">
-          <span class="stat-label">Total Tasks:</span>
-          <span class="stat-value">{{ tasks.length }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Pending:</span>
-          <span class="stat-value pending">{{ pendingTasks }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Completed:</span>
-          <span class="stat-value completed">{{ completedTasks }}</span>
-        </div>
-      </div>
-      <TaskList :tasks="tasks" @update-task="updateTask" @delete-task="deleteTask" />
-    </main>
+    </div>
   </div>
 </template>
 
@@ -70,125 +115,99 @@ const deleteTask = (taskId: string) => {
 </script>
 
 <style scoped>
-.title {
-  font-size: clamp(0.9rem, 3.7vw, 1.7rem);
-  color: #f5f5f5;
+.header {
+  margin-bottom: var(--spacing-xl);
   text-align: center;
-  margin: 10px auto 50px;
-  text-shadow: var(--text-shadow);
-  font-weight: 600;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
 }
 
-.form-limit-row {
-  width: 100%;
-  margin-bottom: 1.2rem;
+.todo-section {
+  margin-top: var(--spacing-2xl);
 }
 
-.form-limit-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.2rem;
-  width: 100%;
+.article-content {
+  color: var(--text-color);
 }
 
-.tasks-limit-inline {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 160px;
-  font-size: 1rem;
-  color: #fbbf24;
-  font-weight: 600;
-  background: rgba(39, 40, 50, 0.92);
-  border-radius: 0.5em;
-  padding: 0.5em 1.2em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-top: 0;
-  height: fit-content;
+.article-content h3 {
+  color: var(--accent-color);
+  margin: var(--spacing-lg) 0 var(--spacing-md);
+  font-size: var(--text-xl);
+}
+
+.article-content ul {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.article-content li {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-muted);
+}
+
+.article-content li:last-child {
+  margin-bottom: 0;
 }
 
 .task-stats {
   display: flex;
-  gap: 1.5rem;
-  margin: 1rem 0;
-  padding: 1rem;
-  background: rgba(39, 40, 50, 0.92);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  gap: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--spacing-xs);
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: #aaa;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .stat-value {
-  font-size: 1.2rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--accent-color);
 }
 
 .stat-value.pending {
-  color: #fbbf24;
+  color: var(--warning-color);
 }
 
 .stat-value.completed {
-  color: #4ade80;
+  color: var(--success-color);
 }
 
 @media (max-width: 900px) {
-  .form-limit-flex {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-  }
-  .tasks-limit-inline {
-    margin-top: 0.5em;
-    align-self: stretch;
-    width: 100%;
-    text-align: left;
-    font-size: 0.95rem;
-    padding: 0.4em 0.8em;
-  }
   .task-stats {
     flex-direction: row;
     justify-content: space-around;
-    padding: 0.8rem;
-    margin: 0.8rem 0;
+    padding: var(--spacing-md);
   }
 }
 
 @media (max-width: 600px) {
-  .tasks-limit-inline {
-    font-size: 0.9rem;
-    padding: 0.3em 0.5em;
+  .article-content h3 {
+    font-size: var(--text-lg);
   }
+
   .task-stats {
     flex-direction: column;
-    gap: 0.8rem;
-    padding: 0.6rem;
-    margin: 0.6rem 0;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
   }
 
   .stat-item {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .stat-item:last-child {
@@ -196,11 +215,11 @@ const deleteTask = (taskId: string) => {
   }
 
   .stat-label {
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
   }
 
   .stat-value {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
 }
 </style>

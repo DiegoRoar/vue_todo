@@ -188,70 +188,83 @@ input[type="checkbox"] {
     border-radius: 0.5rem;
     font-size: 0.93rem;
   }
-  .todo-table-header span {
-    display: inline-block;
-    width: auto;
-    font-weight: 700;
-    margin-right: 1.2em;
-    font-size: 0.98em;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .todo-table-header {
+    display: none;
   }
   .todo-table-row {
+    display: grid;
+    grid-template-columns: 1fr;
     background: rgba(39, 40, 50, 0.92);
     border-radius: 0.4rem;
     margin-bottom: 0.7em;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    padding: 0.7em 0.5em;
+    padding: 0.8em;
+    gap: 0.5em;
   }
   .todo-table-row span {
     display: block;
     width: 100%;
     text-align: left;
     padding: 0.1em 0;
-    margin-bottom: 0.1em;
   }
   .todo-task-index {
-    font-size: 1em;
+    font-size: 0.85em;
     color: #aaa;
     margin-bottom: 0.1em;
     font-weight: 600;
   }
+  .todo-task-title {
+    padding-right: 0;
+    margin-bottom: 0.2em;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.05em;
+    line-height: 1.4;
+  }
+  .task-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.3em;
+    padding-top: 0.3em;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .delete-btn {
+    padding: 0.3em 0.6em;
+    font-size: 1.1em;
+  }
+  .delete-icon {
+    font-size: 1.2em;
+  }
   .done-label {
     margin-left: 0;
     margin-top: 0.2em;
-  }
-  .todo-task-title {
-    padding-right: 0;
-    margin-bottom: 0.1em;
-    font-weight: 600;
-    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
   }
   input[type="checkbox"] {
     margin-right: 0.5em;
-  }
-  .todo-table-header,
-  .todo-table-row {
-    grid-template-columns: 28px 1fr 80px 40px;
-  }
-  
-  .delete-btn {
-    padding: 0.2em 0.4em;
-  }
-  
-  .delete-icon {
-    font-size: 1.2em;
+    width: 1.2em;
+    height: 1.2em;
   }
 }
 
 @media (max-width: 400px) {
-  .todo-table-header span {
-    font-size: 0.9em;
-    margin-right: 0.7em;
-  }
   .todo-table-row {
-    font-size: 0.85rem;
-    padding: 0.2rem 0.05rem;
+    padding: 0.6em;
+    gap: 0.4em;
+  }
+  .todo-task-title {
+    font-size: 1em;
+  }
+  .todo-task-index {
+    font-size: 0.8em;
+  }
+  .done-label {
+    font-size: 0.9em;
+  }
+  .delete-btn {
+    padding: 0.2em 0.5em;
   }
 }
 </style>
