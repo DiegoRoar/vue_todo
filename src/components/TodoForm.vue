@@ -1,6 +1,15 @@
 <template>
   <form @submit.prevent="formSubmitted">
-    <label for="newTask">New Task</label>
+    <div class="form-header-row">
+      <label for="newTask">New Task</label>
+      <div class="tasks-limit-inline">
+        <span v-if="tasksLength === 0">You can add 10 tasks</span>
+        <span v-else-if="tasksLength < 10">
+          You can add {{ 10 - tasksLength }} more task{{ 10 - tasksLength === 1 ? '' : 's' }}
+        </span>
+        <span v-else>You have reached the maximum of 10 tasks</span>
+      </div>
+    </div>
     <textarea
       v-model="newTask"
       name="newTask"
@@ -11,30 +20,34 @@
       @input="error = ''"
       maxlength="250"
       rows="5"
+      :disabled="disabled"
     ></textarea>
     <div class="error-group">
       <small v-if="error" class="small-error">{{ error }}</small>
-      <!-- <small v-else" class="small-ok">{{ }}</small> -->
+      <small v-else-if="disabled" class="small-error">Task limit reached (10/10)</small>
     </div>
-
     <div class="btn-container">
-      <button type="submit" class="btn">Add Task</button>
+      <button type="submit" class="btn" :disabled="disabled">Add Task</button>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, defineProps, watch } from "vue";
+const props = defineProps<{ disabled?: boolean; tasksLength?: number }>();
 const newTask = ref("");
-
-const emit = defineEmits<{
-  addTask: [newTask: string];
-}>();
-
+const emit = defineEmits<{ addTask: [newTask: string]; }>();
 const error = ref("");
 
-// functions
+watch(
+  () => props.disabled,
+  (val) => {
+    if (val) newTask.value = "";
+  }
+);
+
 const formSubmitted = () => {
+  if (props.disabled) return;
   if (newTask.value.trim()) {
     emit("addTask", newTask.value.trim());
     newTask.value = "";
@@ -50,13 +63,35 @@ form {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 6.5rem;
+  margin-top: 2.5rem;
   width: 100%;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
-
+.form-header-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+.tasks-limit-inline {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 160px;
+  font-size: 1rem;
+  color: #fbbf24;
+  font-weight: 600;
+  background: rgba(39, 40, 50, 0.92);
+  border-radius: 0.5em;
+  padding: 0.5em 1.2em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-top: 0;
+  height: fit-content;
+}
 label {
   font-size: 1rem;
   color: var(--text-color);
@@ -66,11 +101,9 @@ label {
   font-weight: 600;
   align-self: flex-start;
 }
-
 input[type="text"] {
   display: none;
 }
-
 textarea {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -85,19 +118,16 @@ textarea {
   min-height: 60px;
   max-height: 200px;
 }
-
 textarea:focus {
   outline: none;
   border: 2px solid var(--accent-color);
   box-shadow: 0 0 0 2px var(--accent-color) 33;
 }
-
 .btn-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
-
 .error-group {
   width: 100%;
   display: flex;
@@ -109,33 +139,25 @@ textarea:focus {
   margin-top: -0.5rem;
   text-align: left;
 }
-
 @media (max-width: 900px) {
-  form {
-    max-width: 98vw;
-    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  .form-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
   }
-  textarea {
-    font-size: 0.98rem;
-    padding: 0.7rem 0.7rem;
-    min-height: 48px;
-    max-height: 140px;
-  }
-  .btn-container {
-    justify-content: center;
+  .tasks-limit-inline {
+    margin-top: 0.5em;
+    align-self: stretch;
+    width: 100%;
+    text-align: left;
+    font-size: 0.95rem;
+    padding: 0.4em 0.8em;
   }
 }
-
 @media (max-width: 600px) {
-  form {
-    max-width: 100vw;
-    padding: 1rem 0.2rem 0.7rem 0.2rem;
-  }
-  textarea {
-    font-size: 0.95rem;
-    padding: 0.6rem 0.5rem;
-    min-height: 36px;
-    max-height: 100px;
+  .tasks-limit-inline {
+    font-size: 0.9rem;
+    padding: 0.3em 0.5em;
   }
 }
 </style>

@@ -2,17 +2,16 @@
   <div class="container">
     <h1 class="title">{{ title }}</h1>
     <main>
-      <TodoForm @add-task="addTask" :disabled="tasks.length >= 10" />
-      <TaskList :tasks />
-      <div class="tasks-limit">
-        <p v-if="tasks.length === 0">You can add 10 tasks</p>
-        <p v-else-if="tasks.length < 10">
-          You can add {{ 10 - tasks.length }} more task{{
-            10 - tasks.length === 1 ? "" : "s"
-          }}
-        </p>
-        <p v-else>You have reached the maximum of 10 tasks</p>
+      <div class="form-limit-row">
+        <div class="form-limit-flex">
+          <TodoForm
+            @add-task="addTask"
+            :disabled="tasks.length >= 10"
+            :tasks-length="tasks.length"
+          />
+        </div>
       </div>
+      <TaskList :tasks />
     </main>
   </div>
 </template>
@@ -49,52 +48,54 @@ const addTask = (newTask: string) => {
   text-transform: uppercase;
 }
 
-.tasks-limit {
-  position: absolute !important;
-  top: 505px;
-  right: 380px;
-  width: 100vw;
-  text-align: center;
-  z-index: 100;
-  pointer-events: none;
+.form-limit-row {
+  width: 100%;
+  margin-bottom: 1.2rem;
 }
 
-.tasks-limit p {
-  display: inline-block;
-  background: rgba(39, 40, 50, 0.92);
-  color: #fbbf24;
+.form-limit-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.tasks-limit-inline {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 160px;
   font-size: 1rem;
-  margin: 0 auto;
+  color: #fbbf24;
   font-weight: 600;
+  background: rgba(39, 40, 50, 0.92);
   border-radius: 0.5em;
   padding: 0.5em 1.2em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-@media (max-width: 1200px) {
-  .tasks-limit {
-    right: 305px;
-    top: 495px;
-  }
+  margin-top: 0;
+  height: fit-content;
 }
 
 @media (max-width: 900px) {
-  .tasks-limit {
-    right: 0;
-    top: 315px;
+  .form-limit-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
   }
-  .tasks-limit p {
+  .tasks-limit-inline {
+    margin-top: 0.5em;
+    align-self: stretch;
+    width: 100%;
+    text-align: left;
     font-size: 0.95rem;
     padding: 0.4em 0.8em;
   }
 }
 
 @media (max-width: 600px) {
-  .tasks-limit {
-    left: 100px;
-    top: 280px;
-  }
-  .tasks-limit p {
+  .tasks-limit-inline {
     font-size: 0.9rem;
     padding: 0.3em 0.5em;
   }
