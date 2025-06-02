@@ -5,7 +5,9 @@
       <div class="tasks-limit-inline">
         <span v-if="tasksLength === 0">You can add 10 tasks</span>
         <span v-else-if="tasksLength < 10">
-          You can add {{ 10 - tasksLength }} more task{{ 10 - tasksLength === 1 ? '' : 's' }}
+          You can add {{ 10 - tasksLength }} more task{{
+            10 - tasksLength === 1 ? "" : "s"
+          }}
         </span>
         <span v-else>You have reached the maximum of 10 tasks</span>
       </div>
@@ -24,7 +26,9 @@
     ></textarea>
     <div class="error-group">
       <small v-if="error" class="small-error">{{ error }}</small>
-      <small v-else-if="disabled" class="small-error">Task limit reached (10/10)</small>
+      <small v-else-if="disabled" class="small-error"
+        >Task limit reached (10/10)</small
+      >
     </div>
     <div class="btn-container">
       <button type="submit" class="btn" :disabled="disabled">Add Task</button>
@@ -36,7 +40,7 @@
 import { ref, defineProps, watch } from "vue";
 const props = defineProps<{ disabled?: boolean; tasksLength?: number }>();
 const newTask = ref("");
-const emit = defineEmits<{ addTask: [newTask: string]; }>();
+const emit = defineEmits<{ addTask: [newTask: string] }>();
 const error = ref("");
 
 watch(
