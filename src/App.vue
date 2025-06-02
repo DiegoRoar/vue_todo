@@ -72,6 +72,7 @@
         <TaskList :tasks="tasks" @update-task="updateTask" @delete-task="deleteTask" />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -79,6 +80,7 @@
 import { ref, computed } from "vue";
 import TodoForm from "./components/TodoForm.vue";
 import TaskList from "./components/TaskList.vue";
+import Footer from "./components/Footer.vue";
 import { Task } from "./types";
 const title = ref("Todo App with Vuejs 3 and TypeScript");
 
