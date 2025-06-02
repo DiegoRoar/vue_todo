@@ -4,6 +4,7 @@
       <span>#</span>
       <span>Task</span>
       <span>Status</span>
+      <span>Actions</span>
     </div>
     <div v-for="(task, idx) in tasks" :key="task.id" class="todo-table-row">
       <span class="todo-task-index">{{ idx + 1 }}</span>
@@ -20,6 +21,11 @@
           <span v-else class="pending-status">Pending</span>
         </label>
       </span>
+      <span class="task-actions">
+        <button @click="handleDelete(task.id)" class="delete-btn" title="Delete task">
+          <span class="delete-icon">×</span>
+        </button>
+      </span>
     </div>
   </section>
   <p v-else class="no-tasks">No tasks yet. Add your first task!</p>
@@ -32,11 +38,16 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  'update-task': [taskId: string, done: boolean]
+  'update-task': [taskId: string, done: boolean],
+  'delete-task': [taskId: string]
 }>();
 
 const handleDoneChange = (taskId: string, done: boolean) => {
   emit('update-task', taskId, done);
+};
+
+const handleDelete = (taskId: string) => {
+  emit('delete-task', taskId);
 };
 </script>
 
@@ -54,7 +65,7 @@ const handleDoneChange = (taskId: string, done: boolean) => {
 .todo-table-header,
 .todo-table-row {
   display: grid;
-  grid-template-columns: 40px 1fr 120px;
+  grid-template-columns: 40px 1fr 120px 80px;
   align-items: center;
   padding: 1rem 1.2rem;
 }
@@ -127,6 +138,35 @@ input[type="checkbox"] {
   font-size: 1.1rem;
 }
 
+.task-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  padding: 0.3em 0.6em;
+  border-radius: 0.3em;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 68, 68, 0.1);
+}
+
+.delete-icon {
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 1;
+}
+
 @media (max-width: 900px) {
   .todo-table {
     max-width: 100vw;
@@ -135,7 +175,7 @@ input[type="checkbox"] {
   }
   .todo-table-header,
   .todo-table-row {
-    grid-template-columns: 28px 1fr 80px;
+    grid-template-columns: 28px 1fr 80px 60px;
     font-size: 0.98rem;
     padding: 0.7rem 0.5rem;
   }
@@ -189,6 +229,18 @@ input[type="checkbox"] {
   }
   input[type="checkbox"] {
     margin-right: 0.5em;
+  }
+  .todo-table-header,
+  .todo-table-row {
+    grid-template-columns: 28px 1fr 80px 40px;
+  }
+  
+  .delete-btn {
+    padding: 0.2em 0.4em;
+  }
+  
+  .delete-icon {
+    font-size: 1.2em;
   }
 }
 
