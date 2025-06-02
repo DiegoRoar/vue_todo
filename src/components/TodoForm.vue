@@ -19,13 +19,17 @@
       placeholder="Add a new task... (max 250 characters)"
       :class="{ 'has-error': !!error }"
       :aria-invalid="!!error || undefined"
-      @input="error = ''"
+      @input="
+        error = '';
+        succeed = '';
+      "
       maxlength="250"
       rows="5"
       :disabled="disabled"
     ></textarea>
     <div class="error-group">
       <small v-if="error" class="small-error">{{ error }}</small>
+      <small v-else-if="succeed" class="small-succeed">{{ succeed }}</small>
       <small v-else-if="disabled" class="small-error"
         >Task limit reached (10/10)</small
       >
@@ -42,6 +46,7 @@ const props = defineProps<{ disabled?: boolean; tasksLength?: number }>();
 const newTask = ref("");
 const emit = defineEmits<{ addTask: [newTask: string] }>();
 const error = ref("");
+const succeed = ref("");
 
 watch(
   () => props.disabled,
@@ -55,6 +60,7 @@ const formSubmitted = () => {
   if (newTask.value.trim()) {
     emit("addTask", newTask.value.trim());
     newTask.value = "";
+    succeed.value = "Task added successfully!";
   } else {
     error.value = "Task cannot be empty!";
   }
@@ -143,6 +149,14 @@ textarea:focus {
   margin-top: -0.5rem;
   text-align: left;
 }
+
+.small-succeed {
+  color: green;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  text-align: left;
+}
+
 @media (max-width: 900px) {
   .form-header-row {
     flex-direction: column;
