@@ -50,7 +50,7 @@ form {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 6.5rem;
   width: 100%;
   max-width: 600px;
   margin-left: auto;
@@ -61,6 +61,7 @@ label {
   font-size: 1rem;
   color: var(--text-color);
   margin-bottom: 0.3rem;
+  margin-left: 0.5rem;
   letter-spacing: 0.02em;
   font-weight: 600;
   align-self: flex-start;
