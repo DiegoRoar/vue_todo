@@ -9,7 +9,12 @@
       <span class="todo-task-index">{{ idx + 1 }}</span>
       <span class="todo-task-title">{{ task.title }}</span>
       <span>
-        <input type="checkbox" v-model="task.done" :id="'done-' + task.id" />
+        <input 
+          type="checkbox" 
+          :checked="task.done" 
+          @change="handleDoneChange(task.id, !task.done)"
+          :id="'done-' + task.id" 
+        />
         <label :for="'done-' + task.id" class="done-label">
           <span v-if="task.done" class="done-status">Done</span>
           <span v-else class="pending-status">Pending</span>
@@ -25,6 +30,14 @@ import { Task } from "../types";
 const props = defineProps<{
   tasks: Task[];
 }>();
+
+const emit = defineEmits<{
+  'update-task': [taskId: string, done: boolean]
+}>();
+
+const handleDoneChange = (taskId: string, done: boolean) => {
+  emit('update-task', taskId, done);
+};
 </script>
 
 <style scoped>

@@ -11,7 +11,7 @@
           />
         </div>
       </div>
-      <TaskList :tasks />
+      <TaskList :tasks="tasks" @update-task="updateTask" />
     </main>
   </div>
 </template>
@@ -32,6 +32,13 @@ const addTask = (newTask: string) => {
       title: newTask,
       done: false,
     });
+  }
+};
+
+const updateTask = (taskId: string, done: boolean) => {
+  const task = tasks.value.find(t => t.id === taskId);
+  if (task) {
+    task.done = done;
   }
 };
 </script>
