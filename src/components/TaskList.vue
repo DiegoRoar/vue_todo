@@ -53,6 +53,9 @@ const props = defineProps<{
   text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: 0.08em;
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.3rem;
 }
 
 .todo-table-row {
@@ -130,24 +133,60 @@ input[type="checkbox"] {
     max-width: 100vw;
     margin: 1rem 0 0 0;
     border-radius: 0.5rem;
-  }
-  .todo-table-header,
-  .todo-table-row {
-    grid-template-columns: 20px 1fr 60px;
     font-size: 0.93rem;
-    padding: 0.5rem 0.2rem;
+  }
+  .todo-table-header span {
+    display: inline-block;
+    width: auto;
+    font-weight: 700;
+    margin-right: 1.2em;
+    font-size: 0.98em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .todo-table-row {
+    background: rgba(39, 40, 50, 0.92);
+    border-radius: 0.4rem;
+    margin-bottom: 0.7em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    padding: 0.7em 0.5em;
+  }
+  .todo-table-row span {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.1em 0;
+    margin-bottom: 0.1em;
+  }
+  .todo-task-index {
+    font-size: 1em;
+    color: #aaa;
+    margin-bottom: 0.1em;
+    font-weight: 600;
+  }
+  .done-label {
+    margin-left: 0;
+    margin-top: 0.2em;
   }
   .todo-task-title {
-    padding-right: 0.3rem;
+    padding-right: 0;
+    margin-bottom: 0.1em;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  input[type="checkbox"] {
+    margin-right: 0.5em;
   }
 }
 
 @media (max-width: 400px) {
-  .todo-table-header,
+  .todo-table-header span {
+    font-size: 0.9em;
+    margin-right: 0.7em;
+  }
   .todo-table-row {
-    grid-template-columns: 16px 1fr 40px;
-    font-size: 0.88rem;
-    padding: 0.3rem 0.1rem;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.05rem;
   }
 }
 </style>

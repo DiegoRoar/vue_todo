@@ -70,4 +70,33 @@ const addTask = (newTask: string) => {
   padding: 0.5em 1.2em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+@media (max-width: 1200px) {
+  .tasks-limit {
+    right: 305px;
+    top: 495px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tasks-limit {
+    right: 0;
+    top: 315px;
+  }
+  .tasks-limit p {
+    font-size: 0.95rem;
+    padding: 0.4em 0.8em;
+  }
+}
+
+@media (max-width: 600px) {
+  .tasks-limit {
+    left: 100px;
+    top: 280px;
+  }
+  .tasks-limit p {
+    font-size: 0.9rem;
+    padding: 0.3em 0.5em;
+  }
+}
 </style>
